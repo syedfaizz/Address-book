@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Text;
 
 namespace AddressBook
 {
-    class Program
+    class ContactPerson
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
@@ -12,19 +14,25 @@ namespace AddressBook
         public double Zip { get; set; }
         public double PhoneNumber { get; set; }
         public string Email { get; set; }
+
         /// <summary>
         /// display contact information.
         /// </summary>
-        public void displayContact()
+        public void DisplayContact()
         {
             Console.WriteLine("FirstName: " + this.FirstName + " LastName: " + this.LastName + " Address: " + this.Address +
                                 " City: " + this.City + " State: " + this.State + " Zip: " + this.Zip +
                                   " PhoneNumber: " + this.PhoneNumber + " Email: " + this.Email);
+
         }
-        static void Main(string[] args)
+
+        /// <summary>
+        /// This method is used to add new contacts.
+        /// </summary>
+        public void AddContact()
         {
             Console.Write("Enter First Name, Last Name, Address, City, State, Zip, Phone Number, Email \n");
-            Program program = new Program()
+            ContactPerson contactPerson = new ContactPerson()
             {
                 FirstName = Console.ReadLine(),
                 LastName = Console.ReadLine(),
@@ -35,7 +43,9 @@ namespace AddressBook
                 PhoneNumber = Convert.ToDouble(Console.ReadLine()),
                 Email = Console.ReadLine(),
             };
-            program.displayContact();
+            List<ContactPerson> list = new List<ContactPerson>();
+            list.Add(contactPerson);
+            contactPerson.DisplayContact();
         }
     }
 }
