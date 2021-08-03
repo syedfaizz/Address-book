@@ -6,4 +6,12 @@
     <RootNamespace>Adress_book</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="Contact.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Contact.cs" />
+  </ItemGroup>
+
 </Project>
