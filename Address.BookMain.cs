@@ -81,5 +81,21 @@ namespace AddressBook
                 }
             }
         }
+        /// <summary>
+        /// delete a contact from address book.
+        /// </summary>
+        /// <param name="name"></param>
+        public void DeleteContact(string name)
+        {
+            foreach (Contact contact in this.contactList)
+            {
+                if (contact.firstName.Equals(name))
+                {
+                    this.contactList.Remove(contact);
+                    Console.WriteLine("Contact Deleted Successfully");
+                    break;
+                }
+            }
+        }
     }
 }
