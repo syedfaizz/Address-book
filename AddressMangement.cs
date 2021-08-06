@@ -19,6 +19,7 @@ namespace Adress_book
                 Console.WriteLine("1.Add contacts");
                 Console.WriteLine("2.Display");
                 Console.WriteLine("3.Edit Details");
+                Console.WriteLine("4.Delete Contact");
                 Console.WriteLine("0.Exit");
                 int choice = Convert.ToInt32(Console.ReadLine());
                 switch (choice)
@@ -34,6 +35,10 @@ namespace Adress_book
                         string name = Console.ReadLine();
                         addressBookMain.EditContact(name);
                         break;
+                    case 4:
+                        string firstName = Console.ReadLine();
+                        addressBookMain.DeleteContact(firstName);
+                        break;
                     case 0:
                         CONTINUE = false;
                         break;
@@ -43,7 +48,7 @@ namespace Adress_book
             }
         }
         /// <summary>
-        /// This method is used to add a new contact.
+        /// This method is used to add multipl contacts.
         /// </summary>
         /// <param name="addressBookMain"></param>
         public static void AddDetails(AddressBookMain addressBookMain)
