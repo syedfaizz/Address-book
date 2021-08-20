@@ -26,6 +26,7 @@ namespace AddressBook
                 Console.WriteLine("6.Delete the address book");
                 Console.WriteLine("7.Display person by city or state name");
                 Console.WriteLine("8.View person by city or state");
+                Console.WriteLine("9.Count person by city or state");
                 Console.WriteLine("0.Exit");
                 int choice = Convert.ToInt32(Console.ReadLine());
                 switch (choice)
@@ -65,6 +66,12 @@ namespace AddressBook
                     case 8:
                         AddressBookMain.PrintList(cityDictionary);
                         AddressBookMain.PrintList(stateDictionary);
+                        break;
+                    case 9:
+                        Console.WriteLine("City");
+                        AddressBookMain.CountPerson(cityDictionary);
+                        Console.WriteLine("State");
+                        AddressBookMain.CountPerson(stateDictionary);
                         break;
                     case 0:
                         CONTINUE = false;
