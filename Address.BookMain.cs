@@ -5,7 +5,7 @@ using System.Text;
 namespace AddressBook
 {
     class AddressBookMain
-    { 
+    {
         const int LAST_NAME = 1, ADDRESS = 2, CITY = 3, STATE = 4, ZIP = 5, PHONE_NUMBER = 6, EMAIL = 7;
 
         private List<Contact> contactList;
@@ -94,6 +94,33 @@ namespace AddressBook
                     Console.WriteLine("Contact Deleted Successfully");
                     break;
                 }
+            }
+        }
+        public static void DisplayPerson(Dictionary<string, AddressBookMain> addressDictionary)
+        {
+            List<Contact> list = null;
+            string name;
+            Console.WriteLine("Enter City or State name");
+            name = Console.ReadLine();
+            foreach (var data in addressDictionary)
+            {
+                AddressBookMain address = data.Value;
+                list = address.contactList.FindAll(x => x.city.Equals(name) || x.state.Equals(name));
+                if (list.Count > 0)
+                {
+                    DisplayList(list);
+                }
+            }
+            if (list == null)
+            {
+                Console.WriteLine("No person present in the address book with same city or state name");
+            }
+        }
+        public static void DisplayList(List<Contact> list)
+        {
+            foreach (var data in list)
+            {
+                data.Display();
             }
         }
     }
