@@ -8,6 +8,8 @@ namespace AddressBook
     {
         static AddressBookMain addressBookMain = new AddressBookMain();
         static Dictionary<string, AddressBookMain> addressDictionary = new Dictionary<string, AddressBookMain>();
+        static Dictionary<string, List<Contact>> cityDictionary = new Dictionary<string, List<Contact>>();
+        static Dictionary<string, List<Contact>> stateDictionary = new Dictionary<string, List<Contact>>();
         public static void ReadInput()
         {
             // variables
@@ -23,6 +25,7 @@ namespace AddressBook
                 Console.WriteLine("5.Delete Contact");
                 Console.WriteLine("6.Delete the address book");
                 Console.WriteLine("7.Display person by city or state name");
+                Console.WriteLine("8.View person by city or state");
                 Console.WriteLine("0.Exit");
                 int choice = Convert.ToInt32(Console.ReadLine());
                 switch (choice)
@@ -34,7 +37,7 @@ namespace AddressBook
                         addressDictionary.Add(addBookName, addressBook1);
                         break;
                     case 2:
-                        AddDetails(AddressManagement.BookName(addressDictionary));
+                        AddDetails(AddressManagement.BookName(addressDictionary), cityDictionary, stateDictionary);
                         break;
                     case 3:
                         addressBookMain = AddressManagement.BookName(addressDictionary);
@@ -52,12 +55,16 @@ namespace AddressBook
                         addressBookMain.DeleteContact(firstName);
                         break;
                     case 6:
-                        Console.WriteLine("Enter address book name to delete:");
+                        Console.WriteLine("Enter address book name to delete");
                         string addressBook = Console.ReadLine();
                         addressDictionary.Remove(addressBook);
                         break;
                     case 7:
                         AddressBookMain.DisplayPerson(addressDictionary);
+                        break;
+                    case 8:
+                        AddressBookMain.PrintList(cityDictionary);
+                        AddressBookMain.PrintList(stateDictionary);
                         break;
                     case 0:
                         CONTINUE = false;
@@ -68,7 +75,7 @@ namespace AddressBook
                 }
             }
         }
-        public static void AddDetails(AddressBookMain addressBookMain)
+        public static void AddDetails(AddressBookMain addressBookMain, Dictionary<string, List<Contact>> cityDictionary, Dictionary<string, List<Contact>> stateDictionary)
         {
             Console.WriteLine("Enter first Name");
             string firstName = Console.ReadLine();
@@ -86,7 +93,7 @@ namespace AddressBook
             long phoneNumber = Convert.ToInt64(Console.ReadLine());
             Console.WriteLine("Enter Email");
             string email = Console.ReadLine();
-            addressBookMain.AddContactDetails(firstName, lastName, address, city, state, zipCode, phoneNumber, email);
+            addressBookMain.AddContactDetails(firstName, lastName, address, city, state, zipCode, phoneNumber, email, cityDictionary, stateDictionary);
         }
         public static AddressBookMain BookName(Dictionary<string, AddressBookMain> addBook)
         {
