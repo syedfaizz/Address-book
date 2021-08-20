@@ -5,18 +5,26 @@ using System.Text;
 namespace AddressBook
 {
     class AddressBookMain
-    {
+    { 
         const int LAST_NAME = 1, ADDRESS = 2, CITY = 3, STATE = 4, ZIP = 5, PHONE_NUMBER = 6, EMAIL = 7;
 
-        private LinkedList<Contact> contactList;
+        private List<Contact> contactList;
         public AddressBookMain()
         {
-            this.contactList = new LinkedList<Contact>();
+            this.contactList = new List<Contact>();
         }
         public void AddContactDetails(string firstName, string lastName, string address, string city, string state, long zipCode, long phoneNumber, string email)
         {
-            Contact contactDetails = new Contact(firstName, lastName, address, city, state, zipCode, phoneNumber, email);
-            this.contactList.AddLast(contactDetails);
+            Contact contact = this.contactList.Find(x => x.firstName.Equals(firstName));
+            if (contact == null)
+            {
+                Contact contactDetails = new Contact(firstName, lastName, address, city, state, zipCode, phoneNumber, email);
+                this.contactList.Add(contactDetails);
+            }
+            else
+            {
+                Console.WriteLine("Person, {0} is already exist in the address book", firstName);
+            }
         }
         public void DisplayContact()
         {
