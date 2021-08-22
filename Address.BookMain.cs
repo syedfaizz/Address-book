@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace AddressBook
 {
     class AddressBookMain
     {
+        // constants
         const int LAST_NAME = 1, ADDRESS = 2, CITY = 3, STATE = 4, ZIP = 5, PHONE_NUMBER = 6, EMAIL = 7;
 
         private List<Contact> contactList;
@@ -15,8 +17,9 @@ namespace AddressBook
         {
             this.contactList = new List<Contact>();
         }
-        public void AddContactDetails(string firstName, string lastName, string address, string city, string state, long zipCode, long phoneNumber, string email, Dictionary<string, List<Contact>> stateDictionary, Dictionary<string, List<Contact>> cityDictionary)
+        public void AddContactDetails(string firstName, string lastName, string address, string city, string state, string zipCode, string phoneNumber, string email, Dictionary<string, List<Contact>> stateDictionary, Dictionary<string, List<Contact>> cityDictionary)
         {
+            Contact contact = this.contactList.Find(x => x.firstName.Equals(firstName));
             if (contact == null)
             {
                 Contact contactDetails = new Contact(firstName, lastName, address, city, state, zipCode, phoneNumber, email);
@@ -92,11 +95,11 @@ namespace AddressBook
                             Console.WriteLine("Data updated successfully");
                             break;
                         case ZIP:
-                            data.zipCode = Convert.ToInt64(Console.ReadLine());
+                            data.zipCode = Console.ReadLine();
                             Console.WriteLine("Data updated successfully");
                             break;
                         case PHONE_NUMBER:
-                            data.phoneNumber = Convert.ToInt64(Console.ReadLine());
+                            data.phoneNumber = Console.ReadLine();
                             Console.WriteLine("Data updated successfully");
                             break;
                         case EMAIL:
@@ -109,7 +112,6 @@ namespace AddressBook
                 }
             }
         }
-
         public void DeleteContact(string name)
         {
             foreach (Contact contact in this.contactList)
@@ -167,6 +169,36 @@ namespace AddressBook
             foreach (var person in dictionary)
             {
                 Console.WriteLine("Number of person {0}:", person.Value.Count);
+            }
+        }
+
+        public static void SortData(Dictionary<string, List<Contact>> dictionary)
+        {
+            List<Contact> list = new List<Contact>();
+            foreach (var data in dictionary)
+            {
+                foreach (var item in data.Value)
+                {
+                    list.Add(item);
+                }
+            }
+            Console.WriteLine("-----------------------------------");
+            Console.WriteLine("\nDisplaying the list based on zipcode");
+            foreach (var item in list.OrderBy(detail => detail.zipCode))
+            {
+                item.Display();
+            }
+            Console.WriteLine("-----------------------------------");
+            Console.WriteLine("\nDisplaying the list based on state");
+            foreach (var item in list.OrderBy(detail => detail.state))
+            {
+                item.Display();
+            }
+            Console.WriteLine("-----------------------------------");
+            Console.WriteLine("\nDisplaying the list based on city");
+            foreach (var item in list.OrderBy(detail => detail.city))
+            {
+                item.Display();
             }
         }
     }
