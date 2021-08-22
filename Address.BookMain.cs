@@ -17,7 +17,6 @@ namespace AddressBook
         }
         public void AddContactDetails(string firstName, string lastName, string address, string city, string state, long zipCode, long phoneNumber, string email, Dictionary<string, List<Contact>> stateDictionary, Dictionary<string, List<Contact>> cityDictionary)
         {
-            Contact contact = this.contactList.Find(x => x.firstName.Equals(firstName));
             if (contact == null)
             {
                 Contact contactDetails = new Contact(firstName, lastName, address, city, state, zipCode, phoneNumber, email);
@@ -110,6 +109,7 @@ namespace AddressBook
                 }
             }
         }
+
         public void DeleteContact(string name)
         {
             foreach (Contact contact in this.contactList)
